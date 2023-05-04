@@ -18,8 +18,8 @@ import java.util.List;
 @SuppressWarnings("FieldCanBeLocal")
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener {
 
-    private final String JSON_URL = "https://mobprog.webug.se/json-api?login=brom";
-    private final String JSON_FILE = "mountains.json";
+    private String JSON_URL = "https://mobprog.webug.se/json-api?login=brom";
+    private String JSON_FILE = "mountains.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,15 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
 
         Log.d("MainActivity", json);
 
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<Mountain>>() {}.getType();
+        List<Mountain> listOfMountain = gson.fromJson(json,type);
+
         ArrayList<RecyclerViewItem> items = new ArrayList<>();
+
+        for (Mountain m: listOfMountain) {
+            items.add(new RecyclerViewItem(m.getName()));
+        }
 
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, items, new RecyclerViewAdapter.OnClickListener() {
             @Override

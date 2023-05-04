@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class JsonFile {
 
-    private final JsonTask.JsonTaskListener listener;
-    private final Activity activity;
+    private JsonTask.JsonTaskListener listener;
+    private Activity activity;
 
     public JsonFile(Activity activity, JsonTask.JsonTaskListener listener) {
         this.activity = activity;
